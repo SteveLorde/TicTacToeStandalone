@@ -12,6 +12,8 @@ const WINCOMBO = [
     [2, 4, 6]
 ]
 const board = document.getElementById('board')
+const winningMessageElement = document.getElementById('winningMessage')
+const winningMessageTextElement = document.querySelector('[data-winning-message-text]')
 let circleTurn
 
 startGame()
@@ -30,11 +32,20 @@ function handleClick(e) {
     const currentClass = circleTurn ? CIRCLE : X
     placeMark(cell, currentClass)
     if (checkWin(currentClass)) {
-
+        endGame(false)
     }
 
     swapTurns()
     setBoardHoverClass()
+}
+
+function endGame(draw) {
+    if (draw) {
+
+    } else {
+        winningMessageTextElement.innerText = `${circleTurn ? "O's" : "X's"} Wins!`
+    }
+    winningMessageElement.classList.add('show')
 }
 
 function placeMark(cell, currentClass) {
